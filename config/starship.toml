@@ -4,3 +4,7 @@
 # Google Cloud: desativado (ocupava muito espaço com o e-mail da conta)
 [gcloud]
 disabled = true
+
+# Node.js: ícone nf-md-nodejs (U+F0399); o padrão U+E718 aparece como um hexágono pequeno
+[nodejs]
+symbol = '󰎙 '

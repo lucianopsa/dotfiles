@@ -62,3 +62,8 @@ Cada passo abaixo vira um módulo em `modules/` usado pelo `install.sh`.
 - `[gcloud] disabled = true` (o e-mail da conta ocupava muito espaço no prompt)
 - Alternativas consideradas: mostrar só o projeto, usuário + projeto, só o ícone
 - Status: ✅ concluído em 2026-11-25
+
+## 9. Starship: ícone do Node.js
+- `[nodejs] symbol = '󰎙 '` (U+F0399, nf-md-nodejs) no `config/starship.toml`
+- Motivo: o padrão U+E718 (nf-dev-nodejs_small) aparece como um hexágono pequeno na JetBrainsMonoNL Nerd Font Mono
+- Status: ✅ concluído em 2026-11-25
