@@ -43,3 +43,12 @@ Cada passo abaixo vira um módulo em `modules/` usado pelo `install.sh`.
   - `cdi` = busca interativa (requer `fzf`)
 - Módulo: `modules/zoxide.sh`
 - Status: ✅ concluído em 2026-11-25 (zoxide 0.10.0)
+
+## 6. fzf (fuzzy finder)
+- Instalação: `sudo dnf install -y fzf` (fzf 0.75.0)
+  - Decisão: dnf (oficial para Fedora e atualizado) em vez de `~/.fzf/install`, que edita os arquivos do shell sozinho
+- Fish: `fzf --fish | source` no bloco interativo do `config.fish`
+  - Ctrl+R histórico · Ctrl+T arquivos · Alt+C diretórios · ativa o `cdi` do zoxide
+- Preview no Ctrl+T (`FZF_CTRL_T_OPTS`): `bat -n` para arquivos, `ls -la` para diretórios; ignora .git/node_modules/target; Ctrl+/ alterna o preview
+- Módulo: `modules/fzf.sh`
+- Status: ✅ concluído em 2026-11-25
