@@ -52,3 +52,7 @@ Cada passo abaixo vira um módulo em `modules/` usado pelo `install.sh`.
 - Preview no Ctrl+T (`FZF_CTRL_T_OPTS`): `bat -n` para arquivos, `ls -la` para diretórios; ignora .git/node_modules/target; Ctrl+/ alterna o preview
 - Módulo: `modules/fzf.sh`
 - Status: ✅ concluído em 2026-11-25
+
+## 7. Fish sem mensagem de boas-vindas
+- `set -g fish_greeting` (vazio) no bloco interativo do `config.fish`
+- Status: ✅ concluído em 2026-11-25

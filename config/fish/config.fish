@@ -7,6 +7,9 @@ fish_add_path -g ~/.local/bin
 type -q bat; and set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
 if status is-interactive
+    # Sem mensagem de boas-vindas
+    set -g fish_greeting
+
     # Prompt
     type -q starship; and starship init fish | source
 
