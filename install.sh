@@ -46,7 +46,7 @@ ASSUME_YES=false
 SHELL_CHOICE="fish"
 FROM_BASH=""          # vazio = perguntar
 
-usage() { sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'; }
+usage() { sed -n '2,11p' "$0" | sed 's/^# \{0,1\}//'; }
 
 while [ $# -gt 0 ]; do
   case "$1" in
