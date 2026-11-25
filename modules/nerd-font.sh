@@ -5,7 +5,9 @@ set -euo pipefail
 install_nerd_font() {
   local font="JetBrainsMono"
   local dest="$HOME/.local/share/fonts/${font}NerdFont"
-  if fc-list | grep -qi "${font} Nerd Font"; then
+  # Captura antes do grep: `fc-list | grep -q` falha com pipefail (SIGPIPE)
+  local installed; installed="$(fc-list : family)"
+  if grep -qi "${font} Nerd Font" <<<"$installed"; then
     echo "[nerd-font] ${font} Nerd Font já instalada"
     return
   fi

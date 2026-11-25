@@ -4,6 +4,18 @@ Sistema base: Fedora 44 Workstation (dnf).
 Cada passo abaixo vira um módulo em `modules/` usado pelo `install.sh`.
 Escopo: só o terminal (shell, prompt, fontes, ferramentas de linha de comando e suas configs). Ferramentas de desenvolvimento como fnm/pnpm ficam fora.
 
+## Como usar o instalador
+```bash
+git clone <repo> ~/dotfiles && cd ~/dotfiles
+./install.sh                 # interativo (pergunta se migra as configs do bash)
+./install.sh -y              # sem perguntas, padrões (inclui from-bash)
+./install.sh --no-from-bash  # sem a migração do bash
+./install.sh --shell fish    # por enquanto só fish
+```
+- Pode rodar várias vezes: pula o que já está instalado e só cria os symlinks que faltam (com backup do que existir).
+- Configs ficam neste repo e são ligadas por symlink em `~/.config` — editar lá é editar aqui.
+- Testado em container Fedora 44 limpo (2026-11-25).
+
 ## 1. Fish shell
 - Instalação: `sudo dnf install -y fish`
 - Módulo: `modules/fish.sh`
@@ -84,3 +96,10 @@ Escopo: só o terminal (shell, prompt, fontes, ferramentas de linha de comando e
 - Módulo: `modules/from-bash.sh` (`link_from_bash_config`) — opcional
 - Observação: o instalador não instala fnm nem pnpm (só configura o fish para usá-los)
 - Status: ✅ concluído em 2026-11-25 (testado em ambiente limpo: node v24.22.1, pnpm, fnm ok)
+
+## 11. Instalador (`install.sh`)
+- Junta os módulos na ordem: dependências → fish → nerd font → starship → bat → fzf → zoxide → symlinks → shell padrão
+- Opções: `-y`, `--from-bash` / `--no-from-bash`, `--shell fish` (base para oferecer zsh no futuro)
+- Só Fedora (aborta em outra distro)
+- Correção: `fc-list | grep -q` com `pipefail` dava falso negativo (SIGPIPE) e baixava a fonte de novo; agora captura a saída antes
+- Status: ✅ testado nesta máquina (idempotente) e num container Fedora 44 limpo

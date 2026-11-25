@@ -3,7 +3,11 @@
 set -euo pipefail
 
 install_starship() {
-  # O script oficial instala ou atualiza para a última versão
+  if command -v starship >/dev/null; then
+    echo "[starship] já instalado: $(starship --version | head -1)"
+    return
+  fi
+  # Script oficial (rodar de novo atualiza para a última versão)
   mkdir -p "$HOME/.local/bin"
   curl -sS https://starship.rs/install.sh | sh -s -- -y -b "$HOME/.local/bin"
 }
