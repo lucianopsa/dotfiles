@@ -2,6 +2,7 @@
 
 Sistema base: Fedora 44 Workstation (dnf).
 Cada passo abaixo vira um módulo em `modules/` usado pelo `install.sh`.
+Escopo: só o terminal (shell, prompt, fontes, ferramentas de linha de comando e suas configs). Ferramentas de desenvolvimento como fnm/pnpm ficam fora.
 
 ## 1. Fish shell
 - Instalação: `sudo dnf install -y fish`
