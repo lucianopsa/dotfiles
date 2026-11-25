@@ -56,3 +56,9 @@ Cada passo abaixo vira um módulo em `modules/` usado pelo `install.sh`.
 ## 7. Fish sem mensagem de boas-vindas
 - `set -g fish_greeting` (vazio) no bloco interativo do `config.fish`
 - Status: ✅ concluído em 2026-11-25
+
+## 8. Starship: módulo Google Cloud desativado
+- Config: `config/starship.toml` → symlink em `~/.config/starship.toml` (`link_starship_config` em `modules/starship.sh`)
+- `[gcloud] disabled = true` (o e-mail da conta ocupava muito espaço no prompt)
+- Alternativas consideradas: mostrar só o projeto, usuário + projeto, só o ícone
+- Status: ✅ concluído em 2026-11-25

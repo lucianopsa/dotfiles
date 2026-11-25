@@ -7,3 +7,7 @@ install_starship() {
   mkdir -p "$HOME/.local/bin"
   curl -sS https://starship.rs/install.sh | sh -s -- -y -b "$HOME/.local/bin"
 }
+
+link_starship_config() {
+  link_file "$DOTFILES/config/starship.toml" "$HOME/.config/starship.toml"
+}

@@ -1,0 +1,6 @@
+# ~/.config/starship.toml — gerenciado por ~/dotfiles
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Google Cloud: desativado (ocupava muito espaço com o e-mail da conta)
+[gcloud]
+disabled = true
