@@ -21,3 +21,7 @@ set_fish_default() {
     echo "[fish] já é o shell padrão"
   fi
 }
+
+link_fish_config() {
+  link_file "$DOTFILES/config/fish/config.fish" "$HOME/.config/fish/config.fish"
+}
