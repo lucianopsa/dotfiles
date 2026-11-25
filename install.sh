@@ -7,9 +7,37 @@
 #   ./install.sh --from-bash     # inclui a migração das configs do bash
 #   ./install.sh --no-from-bash  # não inclui a migração
 #   ./install.sh --shell fish    # shell a configurar (por enquanto só fish)
+#   curl -fsSL https://raw.githubusercontent.com/lucianopsa/dotfiles/master/install.sh | bash
+#   curl -fsSL .../install.sh | bash -s -- -y --no-from-bash   # com opções
 set -euo pipefail
 
-DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO="lucianopsa/dotfiles"
+BRANCH="master"
+
+# ---------- bootstrap (execução via curl | bash) ----------
+# Sem os módulos ao lado do script, baixa o repositório em ~/dotfiles e se executa de lá.
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]:-.}")" && pwd)"
+if [ ! -d "$DOTFILES/modules" ]; then
+  target="${DOTFILES_DIR:-$HOME/dotfiles}"
+  echo "==> Baixando $REPO em $target"
+  if [ -d "$target/.git" ]; then
+    git -C "$target" pull --ff-only
+  elif command -v git >/dev/null && [ ! -e "$target" ]; then
+    git clone "https://github.com/$REPO.git" "$target"
+    git -C "$target" remote set-url --push origin "git@github.com:$REPO.git"
+  else
+    # Sem git (ou pasta já existente sem git): usa o tar.gz do GitHub
+    mkdir -p "$target"
+    curl -fsSL "https://github.com/$REPO/archive/refs/heads/$BRANCH.tar.gz" \
+      | tar -xz --strip-components=1 -C "$target"
+  fi
+  # stdin é o próprio script no `curl | bash`: devolve o terminal para as perguntas
+  if [ -r /dev/tty ] && { : </dev/tty; } 2>/dev/null; then
+    exec bash "$target/install.sh" "$@" </dev/tty
+  else
+    exec bash "$target/install.sh" "$@"
+  fi
+fi
 export DOTFILES
 export PATH="$HOME/.local/bin:$PATH"   # starship/zoxide são instalados aqui
 

@@ -6,6 +6,11 @@ Escopo: só o terminal (shell, prompt, fontes, ferramentas de linha de comando e
 
 ## Como usar o instalador
 ```bash
+# Um comando só (como o Starship): baixa em ~/dotfiles e instala
+curl -fsSL https://raw.githubusercontent.com/lucianopsa/dotfiles/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/lucianopsa/dotfiles/master/install.sh | bash -s -- -y --no-from-bash
+
+# Ou clonando manualmente
 git clone git@github.com:lucianopsa/dotfiles.git ~/dotfiles && cd ~/dotfiles
 ./install.sh                 # interativo (pergunta se migra as configs do bash)
 ./install.sh -y              # sem perguntas, padrões (inclui from-bash)
@@ -103,3 +108,12 @@ git clone git@github.com:lucianopsa/dotfiles.git ~/dotfiles && cd ~/dotfiles
 - Só Fedora (aborta em outra distro)
 - Correção: `fc-list | grep -q` com `pipefail` dava falso negativo (SIGPIPE) e baixava a fonte de novo; agora captura a saída antes
 - Status: ✅ testado nesta máquina (idempotente) e num container Fedora 44 limpo
+
+## 12. Instalação via curl (repositório público)
+- Repositório tornado público (só configs de terminal, nada sensível) para o `curl | bash` funcionar sem token
+- `install.sh` detecta que está rodando sozinho (sem `modules/` ao lado) e baixa o repo em `~/dotfiles` (ou `$DOTFILES_DIR`):
+  - com git: `git clone` via https (push configurado para ssh), ou `git pull` se já existir
+  - sem git: `tar.gz` de `github.com/lucianopsa/dotfiles/archive/refs/heads/master.tar.gz`
+- Reexecuta a partir do repo com stdin em `/dev/tty`, para as perguntas funcionarem no `curl | bash`
+- Decisão: sem GitHub Pages (raw.githubusercontent.com já serve o script)
+- Status: ✅ concluído em 2026-11-25
