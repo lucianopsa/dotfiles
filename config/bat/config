@@ -1,0 +1,3 @@
+# ~/.config/bat/config — gerenciado por ~/dotfiles
+# Tema: automático (segue claro/escuro do terminal). Para fixar um tema:
+# --theme="Catppuccin Mocha"

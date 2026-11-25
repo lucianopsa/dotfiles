@@ -24,3 +24,13 @@ Cada passo abaixo vira um módulo em `modules/` usado pelo `install.sh`.
 - Módulo: `modules/starship.sh`
 - Decisão: script oficial em vez do COPR atim/starship (recomendação do projeto, não precisa de sudo)
 - Status: ✅ concluído em 2026-11-25 (starship 1.27.0)
+
+## 4. bat (cat com syntax highlighting)
+- Instalação: `sudo dnf install -y bat` (já vinha instalado nesta máquina: bat 0.26.1)
+- Config: `config/bat/config` → symlink em `~/.config/bat/config`
+- Decisões:
+  - Tema: automático (segue claro/escuro do terminal), sem `--theme` fixo
+  - `cat` original mantido (sem alias)
+  - Man pages coloridas: `set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"` no `config.fish`
+- Módulo: `modules/bat.sh` (`install_bat`, `link_bat_config`)
+- Status: ✅ concluído em 2026-11-25
