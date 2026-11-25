@@ -34,3 +34,12 @@ Cada passo abaixo vira um módulo em `modules/` usado pelo `install.sh`.
   - Man pages coloridas: `set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"` no `config.fish`
 - Módulo: `modules/bat.sh` (`install_bat`, `link_bat_config`)
 - Status: ✅ concluído em 2026-11-25
+
+## 5. zoxide (cd inteligente)
+- Instalação: script oficial `curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh`
+  (binário em `~/.local/bin`, man em `~/.local/share/man`, sem sudo). Decisão: script em vez de `dnf` (recomendado pelo projeto; dnf tinha 0.9.8)
+- Fish: `zoxide init fish --cmd cd | source` no fim do bloco interativo do `config.fish`
+  - `cd` passa a ser o zoxide (aprende diretórios; `cd proj` pula para o mais usado)
+  - `cdi` = busca interativa (requer `fzf`)
+- Módulo: `modules/zoxide.sh`
+- Status: ✅ concluído em 2026-11-25 (zoxide 0.10.0)
