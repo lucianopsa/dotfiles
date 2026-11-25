@@ -6,7 +6,7 @@ Escopo: só o terminal (shell, prompt, fontes, ferramentas de linha de comando e
 
 ## Como usar o instalador
 ```bash
-git clone <repo> ~/dotfiles && cd ~/dotfiles
+git clone git@github.com:lucianopsa/dotfiles.git ~/dotfiles && cd ~/dotfiles
 ./install.sh                 # interativo (pergunta se migra as configs do bash)
 ./install.sh -y              # sem perguntas, padrões (inclui from-bash)
 ./install.sh --no-from-bash  # sem a migração do bash
