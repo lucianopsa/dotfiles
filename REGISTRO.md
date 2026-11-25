@@ -67,3 +67,19 @@ Cada passo abaixo vira um módulo em `modules/` usado pelo `install.sh`.
 - `[nodejs] symbol = '󰎙 '` (U+F0399, nf-md-nodejs) no `config/starship.toml`
 - Motivo: o padrão U+E718 (nf-dev-nodejs_small) aparece como um hexágono pequeno na JetBrainsMonoNL Nerd Font Mono
 - Status: ✅ concluído em 2026-11-25
+
+## 10. Migração das configurações do bash para o fish (OPCIONAL no instalador)
+- Origem: `~/.bashrc` (o `~/.bashrc.d` não existe; `.bash_profile` só carrega o `.bashrc`)
+- Arquivo: `config/fish/conf.d/from-bash.fish` → symlink em `~/.config/fish/conf.d/` (carregado automaticamente pelo fish)
+- Migrado:
+  | bash | fish |
+  |---|---|
+  | PATH `~/.local/bin` | já no `config.fish` (`fish_add_path`) |
+  | PATH `~/bin` | `fish_add_path` só se o diretório existir |
+  | fnm (`fnm env --shell bash`) | `fnm env --shell fish \| source` + PATH do fnm |
+  | pnpm (`PNPM_HOME`, `$PNPM_HOME/bin`) | `set -gx PNPM_HOME` + `fish_add_path` |
+  | `stty werase ^H` (Ctrl+Backspace) | `bind ctrl-h backward-kill-word` |
+- Cada item só é ativado se a ferramenta/diretório existir (não quebra num sistema sem fnm/pnpm)
+- Módulo: `modules/from-bash.sh` (`link_from_bash_config`) — opcional
+- Observação: o instalador não instala fnm nem pnpm (só configura o fish para usá-los)
+- Status: ✅ concluído em 2026-11-25 (testado em ambiente limpo: node v24.22.1, pnpm, fnm ok)
